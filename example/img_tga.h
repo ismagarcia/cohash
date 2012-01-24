@@ -1,32 +1,21 @@
+/*
+ *  (C) copyright  2011, Ismael Garcia, (U.Girona/ViRVIG, Spain & INRIA/ALICE, France)
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 #ifndef __TGA_H__
 #define __TGA_H__
-
-//#pragma comment(lib, "Opengl32.lib")					//Link to OpenGL32.lib so we can use OpenGL stuff
-//
-//#include <windows.h>									// Standard windows header
-//#include <stdio.h>										// Standard I/O header 
-//#include <gl\gl.h>										// Header for OpenGL32 library
-//
-//#include <windows.h>									// Standard windows header
-//#include <stdio.h>										// Standard I/O header 
-//#include <gl\gl.h>										// Header for OpenGL32 library
-//
-//typedef	struct									
-//{
-//	GLubyte	* data;									// Image Data (Up To 32 Bits)
-//	unsigned int	bpp;											// Image Color Depth In Bits Per Pixel
-//	unsigned int	width;											// Image Width
-//	unsigned int	height;											// Image Height
-//	unsigned int	texID;											// Texture ID Used To Select A Texture
-//	unsigned int	type;											// Image Type (GL_RGB, GL_RGBA)
-//} Texture;	
-//
-//bool loadUncompressedTGA(Texture *, char *, FILE *);	// Load an Uncompressed file
-//bool loadCompressedTGA(Texture *, char *, FILE *);		// Load a Compressed file
-//bool loadTGA(Texture * texture, char * filename);
-//bool saveTGA(Texture * texture, char * filename);
-
-//------------------------------------------------------------------------
 
 #include <stdio.h>
 #include <stdlib.h>
