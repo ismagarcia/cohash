@@ -53,6 +53,7 @@ template<typename T_RAND_ACCESS_ITERATOR1,
             T_HASH_FUNCTOR          hf,
             libhu::U32             &max_age)
 {
+  bool       constrained_hash_access = true;
   libh::detail::backend::hash(keys_begin, keys_end, hash_table_begin, hash_table_end, hf, constrained_hash_access, max_age);
 }
 
