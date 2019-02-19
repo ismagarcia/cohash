@@ -26,8 +26,13 @@ struct copy_tex_value
   inline __host__ __device__
     copy_tex_value(libhu::UPTR _keysUPtr, libhu::UPTR _valuesUPtr, libhu::UPTR _refValuesUPtr, libhu::U32 _W, libhu::U32 _H) : keysUPtr(_keysUPtr), valuesUPtr(_valuesUPtr), refValuesUPtr(_refValuesUPtr), W(_W), H(_H) {} 
 
-  inline __host__ __device__ __forceinline__ libhu::U32 GET_KEY_POS_TEX(libhu::U64 k) { return ((k) & KEY_TYPE_MASK); }
-  inline __host__ __device__ __forceinline__ libhu::U32 GET_KEY_ATTACH_ID_TEX(libhu::U64 k) { return ((k) >> (KEY_TYPE_BITS)) & ATTACH_ID_TYPE_MASK; }
+  //inline __host__ __device__ __forceinline__ libhu::U32 GET_KEY_POS(libhu::U64 k) { return ((k) & KEY_TYPE_MASK); }
+  //inline __host__ __device__ __forceinline__ libhu::U32 GET_KEY_ATTACH_ID(libhu::U64 k) { return ((k) >> (KEY_TYPE_BITS)) & ATTACH_ID_TYPE_MASK; }
+
+  #define GET_KEY_POS(k)       ((k) & KEY_TYPE_MASK)
+  #define GET_KEY_ATTACH_ID(k) (((k) >> (KEY_TYPE_BITS)) & ATTACH_ID_TYPE_MASK)
+
+
 
   inline __host__ __device__
   void operator()(T& t)
@@ -36,8 +41,8 @@ struct copy_tex_value
     libhu::U32* refValuesPtr = (libhu::U32*)refValuesUPtr;
     if (t != PACKED_UNDEFINED_KEY)
     {
-      //valuesPtr[GET_KEY_POS_TEX(t)] = GET_KEY_ATTACH_ID_TEX(GET_KEY_POS(t));
-      valuesPtr[GET_KEY_POS_TEX(t)] = refValuesPtr[GET_KEY_POS(t)];
+      //valuesPtr[GET_KEY_POS(t)] = GET_KEY_ATTACH_ID(GET_KEY_POS(t));
+      valuesPtr[GET_KEY_POS(t)] = refValuesPtr[GET_KEY_POS(t)];
     }
   }
 
