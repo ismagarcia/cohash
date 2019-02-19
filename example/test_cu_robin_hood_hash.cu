@@ -118,7 +118,7 @@ int testRobinHoodHash(ConfigParams& cfg)
 #endif
 
   thrust::device_vector<T_KEY> keys(num_extra);
-  thrust::fill(keys.begin(), keys.end(), kcf.UNDEFINED_KEY);
+  thrust::fill(keys.begin(), keys.end(), T_COH_FUNCTOR::UNDEFINED_KEY);//kcf.UNDEFINED_KEY);
 
   if (cfg.rand_num_mode)
   {
