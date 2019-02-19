@@ -46,7 +46,7 @@ static const libhu::U32 KEY_TYPE_MASK                 = libhu::U32( libhu::U64((
 static const libhu::U32 PACKED_KEY_TYPE_MASK          = libhu::U32( libhu::U64((1ull) << KEY_TYPE_BITS) - 1ul );
 static const libhu::U32 KEY_TYPE_RANGE                = libhu::U32( libhu::U64((1ull) << KEY_TYPE_BITS) - 2ul );
 /*static*/ const libhu::U32 UNDEFINED_KEY                 = libhu::U32( libhu::U64((1ull) << KEY_TYPE_BITS) - 1ul );
-static const libhu::U32 PACKED_UNDEFINED_KEY          = libhu::U32( libhu::U64((1ull) << KEY_TYPE_BITS) - 1ul );
+/*static*/ const libhu::U32 PACKED_UNDEFINED_KEY          = libhu::U32( libhu::U64((1ull) << KEY_TYPE_BITS) - 1ul );
 
 static const libhu::U32 ATTACH_ID_TYPE_BITS           = 28u;
 static const libhu::U32 ATTACH_ID_TYPE_MASK           = libhu::U32( libhu::U64((1ull) << ATTACH_ID_TYPE_BITS) - 1ul );
