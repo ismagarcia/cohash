@@ -8,9 +8,9 @@ INCLUDE(FindCUDA)
 SET(CUDA_SDK_ROOT_DIR $ENV{CUDA_SDK_ROOT_DIR})
 
 LINK_LIBRARIES(
-  "winmm.lib"
-  "psapi.lib"
-  "shlwapi.lib"
+#  "winmm.lib"
+#  "psapi.lib"
+#  "shlwapi.lib"
 )
 
 INCLUDE_DIRECTORIES(
