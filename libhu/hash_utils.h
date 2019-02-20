@@ -58,8 +58,8 @@ typedef signed long long       S64;
 
 #include <stdint.h>
 
-typedef unsigned int64_t       U64;
-typedef signed int64_t         S64;
+typedef uint64_t       U64;
+typedef int64_t         S64;
 
 #define CUDA_CONST             static const
 #define CUDA_CONST_VAR         const
