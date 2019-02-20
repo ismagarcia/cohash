@@ -29,7 +29,7 @@ LIST(APPEND CUDA_NVCC_FLAGS -gencode arch=compute_30,code=sm_30 -DTHRUST_DEVICE_
 LIST(APPEND CUDA_NVCC_FLAGS -Xcompiler -fopenmp)
 
 #CUDA_ADD_EXECUTABLE(
-ADD_EXECUTABLE
+ADD_EXECUTABLE(
   example_01
   main.cpp
 )
