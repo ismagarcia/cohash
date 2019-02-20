@@ -67,6 +67,8 @@ template<typename T_RAND_ACCESS_ITERATOR1,
               libhu::U32              max_age,
               thrust::host_space_tag)
 {
+  std::cerr << "GPU" << std::endl;
+
   //if (checkTargetISAIsSupported())
   //{
   //  std::cerr << "libhu::detail::backend::ispc::access(...)" << std::endl;
@@ -97,6 +99,8 @@ template<typename T_RAND_ACCESS_ITERATOR1,
   // XXX this prologue belongs somewhere else
   thrust::detail::trivial_sequence<T_RAND_ACCESS_ITERATOR1> keys(search_keys_begin, search_keys_end);
   thrust::detail::trivial_sequence<T_RAND_ACCESS_ITERATOR2> hash_table(hash_table_begin, hash_table_end);
+
+  std::cerr << "GPU" << std::endl;
 
   libhu::detail::backend::cuda::access(keys.begin(), keys.end(), hash_table.begin(), hash_table.end(), output_values_begin, hf, constrained_hash_access, max_age);
 
