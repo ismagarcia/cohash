@@ -56,7 +56,7 @@ typedef signed long long       S64;
 
 #else
 
-#include <inttypes.h>
+#include <stdint.h>
 
 typedef unsigned int64_t       U64;
 typedef signed int64_t         S64;
