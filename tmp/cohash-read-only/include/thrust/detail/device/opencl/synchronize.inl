@@ -1,0 +1,68 @@
+/*
+ *  Copyright 2008-2010 NVIDIA Corporation
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+#include <thrust/detail/config.h>
+
+// do not attempt to compile this code, which relies on 
+// CUDART, without system support
+#if THRUST_DEVICE_BACKEND
+
+#include <thrust/detail/device/opencl/synchronize.h>
+#include <CL/cl.h>
+#include <thrust/system/opencl_error.h>
+#include <thrust/system_error.h>
+
+namespace thrust
+{
+
+namespace detail
+{
+
+namespace device
+{
+
+namespace opencl
+{
+
+void synchronize(const char *message)
+{
+  // IG 09/12/2012 ismael.garcia@arm.com
+  //cl_command_queue command_queue;
+  //cint_t error = clFinish(command_queue);
+  //if(error)
+  //{
+  //  throw thrust::system_error(error, thrust::opencl_category(), std::string("synchronize: ") + message);
+  //} // end if
+} // end synchronize()
+
+void synchronize_if_enabled(const char *message)
+{
+// XXX this could potentially be a runtime decision
+#if __THRUST_SYNCHRONOUS
+  synchronize(message);
+#endif
+} // end synchronize_if_enabled()
+
+} // end opencl
+
+} // end device
+
+} // end detail
+
+} // end thrust
+
+#endif // THRUST_DEVICE_BACKEND
+

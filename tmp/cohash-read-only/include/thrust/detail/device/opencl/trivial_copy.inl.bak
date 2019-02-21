@@ -1,0 +1,150 @@
+/*
+ *  Copyright 2008-2010 NVIDIA Corporation
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
+#pragma once
+
+#include <thrust/detail/config.h>
+
+#if THRUST_DEVICE_BACKEND == THRUST_DEVICE_BACKEND_OPENCL
+
+#include <thrust/detail/device/opencl/trivial_copy.h>
+#include <CL/cl.h>
+#include <thrust/system_error.h>
+//#include <thrust/system/cuda_error.h>
+
+#include <thrust/iterator/iterator_categories.h>
+#include <thrust/iterator/iterator_traits.h>
+
+namespace thrust
+{
+
+namespace detail
+{
+
+namespace device
+{
+
+namespace opencl
+{
+
+namespace detail
+{
+
+// IG 09/12/2012 ismael.garcia@arm.com
+enum openclMemcpyKind
+{
+    openclMemcpyHostToHost          =   0,      /**< Host   -> Host */
+    openclMemcpyHostToDevice        =   1,      /**< Host   -> Device */
+    openclMemcpyDeviceToHost        =   2,      /**< Device -> Host */
+    openclMemcpyDeviceToDevice      =   3,      /**< Device -> Device */
+    openclMemcpyDefault             =   4       /**< Default based unified virtual address space */
+};
+
+inline void checked_openclMemcpy(void *dst, const void *src, size_t count, enum openclMemcpyKind kind)
+{
+  // IG 09/12/2012 ismael.garcia@arm.com
+  //cl_command_queue queue;
+  //cl_int error = clEnqueueCopyBuffer(queue, dst, src, 0, 0, count, 0, NULL, NULL);
+  //if(error)
+  //{
+  //  throw thrust::system_error(error, thrust::opencl_category());
+  //} // end error
+} // end checked_openclMemcpy()
+
+template<typename SrcSpace,
+         typename DstSpace>
+  struct is_host_to_device
+    : integral_constant<
+        bool,
+        thrust::detail::is_convertible<SrcSpace, thrust::host_space_tag>::value &&
+        thrust::detail::is_convertible<DstSpace, thrust::device_space_tag>::value
+      >
+{};
+
+
+template<typename SrcSpace,
+         typename DstSpace>
+  struct is_device_to_host
+    : integral_constant<
+        bool,
+        thrust::detail::is_convertible<SrcSpace, thrust::device_space_tag>::value &&
+        thrust::detail::is_convertible<DstSpace, thrust::host_space_tag>::value
+      >
+{};
+
+
+template<typename SrcSpace,
+         typename DstSpace>
+  struct is_device_to_device
+    : integral_constant<
+        bool,
+        thrust::detail::is_convertible<SrcSpace, thrust::device_space_tag>::value &&
+        thrust::detail::is_convertible<DstSpace, thrust::device_space_tag>::value
+      >
+{};
+
+template<typename SrcSpace,
+         typename DstSpace>
+  struct opencl_memcpy_kind
+    : thrust::detail::eval_if<
+        is_host_to_device<SrcSpace,DstSpace>::value,
+        thrust::detail::integral_constant<openclMemcpyKind, openclMemcpyHostToDevice>,
+
+        eval_if<
+          is_device_to_host<SrcSpace,DstSpace>::value,
+          thrust::detail::integral_constant<openclMemcpyKind, openclMemcpyDeviceToHost>,
+
+          eval_if<
+            is_device_to_device<SrcSpace,DstSpace>::value,
+            thrust::detail::integral_constant<openclMemcpyKind, openclMemcpyDeviceToDevice>,
+            void
+          >
+        >
+      >::type
+{};
+
+} // end namespace detail
+
+
+template<typename RandomAccessIterator1,
+         typename Size,
+         typename RandomAccessIterator2>
+  void trivial_copy_n(RandomAccessIterator1 first,
+                      Size n,
+                      RandomAccessIterator2 result)
+{
+  typedef typename thrust::iterator_value<RandomAccessIterator1>::type T;
+
+  typedef typename thrust::iterator_space<RandomAccessIterator1>::type SrcSpace;
+  typedef typename thrust::iterator_space<RandomAccessIterator2>::type DstSpace;
+
+  void *dst = thrust::raw_pointer_cast(&*result);
+  const void *src = thrust::raw_pointer_cast(&*first);
+
+  detail::checked_openclMemcpy(dst, src, n * sizeof(T), detail::opencl_memcpy_kind<SrcSpace, DstSpace>::value);
+}
+
+
+} // end namespace opencl
+
+} // end namespace device
+
+} // end namespace detail
+
+} // end namespace thrust
+
+#endif // THRUST_DEVICE_BACKEND
+
