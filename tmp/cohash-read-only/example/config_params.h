@@ -24,8 +24,8 @@
 
 //------------------------------------------------------------------------
 #define ENABLE_HOST_COMPUTING                0 
-#define ENABLE_DEVICE_CUDA_COMPUTING         0
-#define ENABLE_DEVICE_OMP_COMPUTING          1
+#define ENABLE_DEVICE_CUDA_COMPUTING         1
+#define ENABLE_DEVICE_OMP_COMPUTING          0
 #define ENABLE_DEVICE_OPENCL_COMPUTING       0
 
 #define OMP_CUSTOM_OPTIONS_ON_RUNTIME        1 // Set to 1, won't take the OMP_CUSTOM_* values
