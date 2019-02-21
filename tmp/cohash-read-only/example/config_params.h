@@ -72,7 +72,7 @@
 #define ENABLE_KERNEL_PROFILING              0 // Enable kernel profiling
 #define ENABLE_GATOR                         0 // Enable gator profiling
 #define ENABLE_PERF                          0 // Enable perf profiling
-#define ENABLE_TRACE_CMD                     1 // Enable trace-cmd profiling
+#define ENABLE_TRACE_CMD                     0 // Enable trace-cmd profiling
 //------------------------------------------------------------------------
 
 #if (ENABLE_TRACE_CMD)
