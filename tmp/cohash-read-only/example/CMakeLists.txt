@@ -44,9 +44,9 @@ INCLUDE_DIRECTORIES(
 #  "/media/ARM_DEV/work/dev/experimental/arndale/freeocl_x86_32/freeocl-read-only/" 
 #  "/media/ARM_DEV/work/dev/experimental/arndale/freeocl_x86_32/freeocl-read-only/include"
 #  "/media/ARM_DEV/work/dev/experimental/arndale/freeocl_x86_32/freeocl-read-only/src"
-   "/work/freeocl_arm_patched/"
-   "/work/freeocl_arm_patched/include"
-   "/work/freeocl_arm_patched/src"
+#   "/work/freeocl_arm_patched/"
+#   "/work/freeocl_arm_patched/include"
+#   "/work/freeocl_arm_patched/src"
 
 )
 
@@ -76,9 +76,9 @@ ADD_EXECUTABLE(
   #sqlite3.c 
   #statsdb.c
 
-  os/perf_event.h
-  os/pmf_perf_counter.h
-  os/pmf_perf_counter.cpp
+#  os/perf_event.h
+#  os/pmf_perf_counter.h
+#  os/pmf_perf_counter.cpp
 )
 
 INSTALL(TARGETS example_01 CONFIGURATIONS Release None "" DESTINATION ${example_01_SOURCE_DIR})
